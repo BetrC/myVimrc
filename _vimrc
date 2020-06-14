@@ -1,5 +1,8 @@
 " Vim Setup
 " Startup {{{
+set ffs=mac,unix
+let uname = substitute(system('uname'), '\n', '', '')
+" Example values: Linux, Darwin, MINGW64_NT-10.0, MINGW32_NT-6.1
 filetype indent plugin on
 " vim 文件折叠方式为 marker
 augroup ft_vim
@@ -62,10 +65,13 @@ let g:Powerline_colorscheme='solarized256'
 set gcr=a:block-blinkon0
 
 "guicursor
-set guicursor=n-v-ve-r:block-Cursor
-set guicursor=i-c:ver20-iCursor
-highlight Cursor guifg=white guibg=black
-highlight iCursor guifg=white guibg=steelblue
+if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]20;CursorShape=0\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+    let &t_SI = "\<Esc>]50;CursorShape=0\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
 
 " }}}
 
@@ -73,10 +79,11 @@ highlight iCursor guifg=white guibg=steelblue
  " font for multiple system
  if has('win32')
      set guifont=Cascadia_Code:h11,Monaco_for_Powerline:h11,Microsoft_YaHei_UI:h11,Courier_New:h11,monospace:h11:cANSI
+ elseif has('macunix')
+     set guifont=Cascadia\ Code:h15,Monaco\ for\ Powerline:h15,Courier_New:h15,monospace:h15
+Menlo\ Regular:h15
  elseif has('unix')
-     set guifont=Cascadia\ Code 11,Monaco\ for\ Powerline 11,Courier_New 11,monospace 11
- elseif has('mac')
-     set guifont=Cascadia\ Code:h11,Monaco\ for\ Powerline:h11,Courier_New 11,monospace:h11
+     set guifont=Cascadia\ Code 13,Monaco\ for\ Powerline 13,Courier_New 13,monospace 13
  endif
 " }}}
 
@@ -113,15 +120,21 @@ highlight iCursor guifg=white guibg=steelblue
 " }}}
 
 " Key Map {{{
- nmap <Space>w :w<CR> 
+ nmap <Space>w :w<CR>
  nmap <Space>s :wq<CR>
  nmap <Space>q :wq!<CR>
-
+ nmap <Space>rc :e ~/.vimrc<CR>
  " switch window
  nmap <Space>h <C-w>h
  nmap <Space>l <C-w>l
  nmap <Space>j <C-w>j
  nmap <Space>k <C-k>k
+
+ "switch in edit mode
+ inoremap <C-j> <down>
+ inoremap <C-k> <up>
+ inoremap <C-l> <right>
+ inoremap <C-H> <left>
 
  nmap <F10> :TagbarToggle<CR>
 
@@ -154,6 +167,8 @@ endf
  Plugin 'xolox/vim-lua-ftplugin'
  Plugin 'majutsushi/tagbar'
  Plugin 'preservim/nerdtree'
+ Plugin 'Valloric/YouCompleteMe'
+ Plugin 'liuchengxu/vim-which-key'
  call vundle#end()
  filetype plugin indent on
 " }}}
@@ -163,7 +178,7 @@ endf
 
     " nerdtree
     autocmd StdinReadPre * let s:std_in=1
-    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+    " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " }}}
 
@@ -178,3 +193,4 @@ let g:tagbar_type_lua = {
     \ 'sort':0
 \ }
 " }}}
+
