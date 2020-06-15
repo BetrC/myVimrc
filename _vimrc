@@ -28,6 +28,7 @@ set autochdir
 set noerrorbells
 set visualbell
 set autoread
+set copyindent
 set wildmenu
 set wildmode=longest:list,full
 " }}}
@@ -72,7 +73,8 @@ else
     let &t_SI = "\<Esc>]50;CursorShape=0\x7"
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
-
+set list
+set listchars=tab:>>,trail:.
 " }}}
 
 " Font {{{
@@ -115,8 +117,9 @@ Menlo\ Regular:h15
  set nocompatible
  set wildmenu
  set spell spelllang=en_us
- set listchars=tab:»■,trail:■
- set list
+"show space with .
+set list
+set listchars=tab:>>,trail:.
 " }}}
 
 " Key Map {{{
@@ -169,6 +172,8 @@ endf
  Plugin 'preservim/nerdtree'
  Plugin 'Valloric/YouCompleteMe'
  Plugin 'liuchengxu/vim-which-key'
+ Plugin 'godlygeek/tabular'
+ Plugin 'plasticboy/vim-markdown'
  call vundle#end()
  filetype plugin indent on
 " }}}
@@ -194,3 +199,11 @@ let g:tagbar_type_lua = {
 \ }
 " }}}
 
+"Files{{{
+
+au BufReadPost *
+\ if line("'\"") > 1 && line("'\"") <= line("$") |
+\ exe "normal! g'\"" |
+\ endif
+
+"}}}
