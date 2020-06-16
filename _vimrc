@@ -85,7 +85,7 @@ set listchars=tab:>>,trail:.
      set guifont=Cascadia\ Code:h15,Monaco\ for\ Powerline:h15,Courier_New:h15,monospace:h15
 Menlo\ Regular:h15
  elseif has('unix')
-     set guifont=Cascadia\ Code 13,Monaco\ for\ Powerline 13,Courier_New 13,monospace 13
+     set guifont=Cascadia\ Code\ 13,Monaco\ for\ Powerline\ 13,Courier_New\ 13,monospace\ 13
  endif
 " }}}
 
@@ -174,6 +174,7 @@ endf
  Plugin 'liuchengxu/vim-which-key'
  Plugin 'godlygeek/tabular'
  Plugin 'plasticboy/vim-markdown'
+ Plugin 'zxqfl/tabnine-vim'
  call vundle#end()
  filetype plugin indent on
 " }}}
