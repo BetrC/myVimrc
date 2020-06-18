@@ -126,7 +126,11 @@ set listchars=tab:>>,trail:.
  nmap <Space>w :w<CR>
  nmap <Space>s :wq<CR>
  nmap <Space>q :wq!<CR>
- nmap <Space>rc :e ~/.vimrc<CR>
+ if has('win32') || has('win64')
+     nmap <Space>rc :e ~/_vimrc<CR>
+ else
+     nmap <Space>rc :e ~/.vimrc<CR>
+ end
  " switch window
  nmap <Space>h <C-w>h
  nmap <Space>l <C-w>l
@@ -170,7 +174,7 @@ endf
  Plugin 'xolox/vim-lua-ftplugin'
  Plugin 'majutsushi/tagbar'
  Plugin 'preservim/nerdtree'
- Plugin 'Valloric/YouCompleteMe'
+ "Plugin 'Valloric/YouCompleteMe'
  Plugin 'liuchengxu/vim-which-key'
  Plugin 'godlygeek/tabular'
  Plugin 'plasticboy/vim-markdown'
