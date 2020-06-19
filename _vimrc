@@ -179,6 +179,10 @@ endf
  Plugin 'godlygeek/tabular'
  Plugin 'plasticboy/vim-markdown'
  Plugin 'zxqfl/tabnine-vim'
+ Plugin 'tpope/vim-surround'
+ Plugin 'ctrlpvim/ctrlp.vim'
+ Plugin 'dense-analysis/ale'
+
  call vundle#end()
  filetype plugin indent on
 " }}}
@@ -203,6 +207,28 @@ let g:tagbar_type_lua = {
     \ 'sort':0
 \ }
 " }}}
+
+"{{{ Ctrlp
+    let g:ctrlp_map = '<c-p>'
+    let g:ctrlp_cmd = 'CtrlP'
+    let g:ctrlp_working_path_mode = 'ra'
+    if has('win32')
+        set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+        let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'
+    elseif has('unix')
+        set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+        let g:ctrlp_user_command = 'find %s -type f'
+    endif
+    
+    let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+    let g:ctrlp_custom_ignore = {
+      \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+      \ 'file': '\v\.(exe|so|dll)$',
+      \ 'link': 'some_bad_symbolic_links',
+      \ }
+    let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
+"}}}
 
 "Files{{{
 
