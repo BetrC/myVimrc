@@ -23,6 +23,7 @@ set autochdir
 set clipboard+=unnamed
 set winaltkeys=no
 set undofile
+set undodir=~/.undodir
 set autochdir
 " error handler
 set noerrorbells
