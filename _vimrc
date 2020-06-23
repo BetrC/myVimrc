@@ -183,6 +183,10 @@ endf
  Plugin 'tpope/vim-surround'
  Plugin 'ctrlpvim/ctrlp.vim'
  Plugin 'dense-analysis/ale'
+ Plugin 'RRethy/vim-illuminate'
+ Plugin 'markonm/traces.vim'
+ Plugin 'haya14busa/incsearch.vim'
+ Plugin 'hanfezh/pretty-json'
 
  call vundle#end()
  filetype plugin indent on
