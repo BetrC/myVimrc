@@ -13,6 +13,7 @@ augroup END
 " }}}
 
 " General {{{
+set t_vb=
 set nocompatible
 set showcmd
 set showmode
